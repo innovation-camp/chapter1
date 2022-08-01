@@ -376,6 +376,8 @@ fabric.properties
 
 # Environments
 .env
+*.env
+.env.*
 
 # Spyder project settings
 
