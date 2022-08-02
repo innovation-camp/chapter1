@@ -56,6 +56,19 @@ def check_email():
 
 @bp.route('/api/signup', methods=['POST'])
 def api_signup():
+    email = request.form.get('usermail')
+    password = request.form.get('userpw')
+    password_check = request.form.get('userpwcheck')
+    nickname = request.form.get('usernickname')
+
+    if password != password_check:
+        return render_template('account/signup.html', msg="비밀번호가 일치하지 않습니다.")
+
+    hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+
+    db = get_db()
+    db.user.insert_one({"email": email, "password": hashed_password, "nickname": nickname})
+
     return redirect(url_for('account.signin'))
 
 
