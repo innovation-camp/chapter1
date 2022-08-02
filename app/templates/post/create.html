@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name = "Keywords" content = "헌책줄게, 중고책, 웹 포트폴리오, 헌책, 중고나라, 당근마켓, 알라딘">
+    <meta name = "Description" content = "안녕하세요, 중고책 거래 전문 사이트 헌책줄게입니다.">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/2224/2224395.png">
+
+    <link rel ="stylesheet" href = "{{ url_for('static', filename='navbar.css')}}" type="text/css">
+    <link rel ="stylesheet" href = "{{ url_for('static', filename='board.css')}}" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300&display=swap" rel="stylesheet">    
+    <title>헌책줄게</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar_menu">
+                <i class="test"></i>
+                <a class="navbar_logo" href="">헌책줄게</a>
+            <ul class="navbar_select">
+                <li><a href="">판매하기</a></li>
+                <li><a href="">구매하기</a></li>
+            </ul>
+        </div>
+        <ul class="navbar_login">
+            <li><a class="login" href="">로그인</a></li>
+        </ul>
+    </nav>
+
+    <div class="posting">
+        <div class="form-title">
+          <h2> 글 등록하기 </h2>
+        </div>
+        <form>
+          <div class="flex-container">
+            <div class="flex-item">
+              <label class="input-group-text" for="isselling">구 분</label>
+            </div>
+            <div class="flex-item">
+              <select class="form-select" id="isselling">
+                <option value="1">팝니다</option>
+                <option value="0">삽니다</option>
+              </select>
+            </div>
+          </div>
+    
+          <div class="flex-container">
+            <div class="flex-item">
+              <label class="input-group-text" for="genre">장 르</label>
+            </div>
+            <div class="flex-item">
+              <select class="form-select" id="genre">
+                <option selected>-- 선택하기 --</option>
+                <option value="fic">소설</option>
+                <option value="self">자기계발</option>
+                <option value="lang">외국어</option>
+                <option value="test">수험서</option>
+                <option value="hobby">취미</option>
+                <option value="etc">기타</option>
+              </select>
+            </div>
+          </div>
+    
+          <div class="flex-container">
+            <div class="flex-item">
+              <label class="input-group-text">책 이 름</label>
+            </div>
+            <div class="flex-item">
+              <input id="title" type="text" class="form-control">
+            </div>
+          </div>
+    
+          <div class="flex-container">
+            <div class="flex-item">
+              <label class="input-group-text" for="condition">책 상 태</label>
+            </div>
+            <div class="flex-item">
+              <select class="form-select" id="condition">
+                <option selected>-- 선택하기 --</option>
+                <option value="1">아주좋음</option>
+                <option value="2">좋음</option>
+                <option value="3">중간</option>
+                <option value="4">낡음</option>
+                <option value="5">아주낡음</option>
+              </select>
+            </div>
+          </div>
+    
+          <div class="flex-container">
+            <div class="flex-item">
+              <label class="input-group-text">판매가격</label>
+            </div>
+            <div class="flex-item">
+              <input type="text" class="form-control" id="price" placeholder="숫자만 입력하세요">
+            </div>
+          </div>
+    
+          <div class="flex-container">
+            <div class="flex-item">
+              <label class="input-group-text">내 용</label>
+            </div>
+            <div class="flex-item">
+              <textarea id="description" placeholder="내용을 입력하세요"></textarea>
+            </div>
+          </div>
+    
+          <div class="flex-container">
+            <div class="flex-item">
+              <label class="input-group-text">지 역</label>
+            </div>
+            <div class="flex-item">
+              <input id="location" type="text" class="form-control" placeholder="ex) 동작구/은평구">
+            </div>
+          </div>
+    
+          <div class="flex-container">
+            <div class="flex-item">
+              <label class="input-group-text">연 락 처</label>
+            </div>
+            <div class="flex-item">
+              <input id="contact" type="text" class="form-control" placeholder="010-0000-0000">
+            </div>
+          </div>
+        </form>
+    
+        <button type="button" class="btn btn-warning mybtn" id="btn-save">등록하기</button>
+        <a href="/" role="button" class="btn btn-secondary mybtn">목록으로</a>
+    
+      </div>
+</body>
+</html>
