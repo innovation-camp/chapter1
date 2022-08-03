@@ -26,23 +26,23 @@ def signin():
 
 @bp.route('/api/signup', methods=['POST'])
 def api_signup():
-    email_receive = request.form.get('usermail')
+    email = request.form.get('usermail')
     password = request.form.get('userpw')
     password_check = request.form.get('userpwcheck')
     nickname = request.form.get('usernickname')
 
-    if not email_receive:
+    if not email:
         flash('이메일을 입력해주세요.')
         return render_template('account/signup.html')
 
-    if len(email_receive.split('@')) < 2:
+    if len(email.split('@')) < 2:
         flash('올바른 이메일 형식이 아닙니다.')
         return render_template('account/signup.html')
 
     db = get_db()
-    email = db.user.find_one({"email": email_receive})
+    user = db.user.find_one({"email": email})
 
-    if email:
+    if user:
         flash('중복된 이메일입니다.')
         return render_template('account/signup.html')
 
@@ -58,4 +58,6 @@ def api_signup():
 
 @bp.route('/api/signin')
 def api_signin():
+
+
     return render_template('account/signin.html')
