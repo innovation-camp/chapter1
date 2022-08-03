@@ -52,7 +52,7 @@ def api_signup():
         flash('올바른 이메일 형식이 아닙니다.')
         return render_template('account/signup.html')
 
-    reg = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/'
+    reg = '^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$'
     if not re.search(reg, password):
         flash('비밀번호 형식이 올바르지 않습니다. (영문/숫자포함 8자이상)')
         return render_template('account/signup.html')
