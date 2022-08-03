@@ -3,9 +3,9 @@ import jwt
 import hashlib
 from datetime import datetime, timedelta
 
-from bson import ObjectId
 from flask import Blueprint, render_template, request, g, redirect, url_for, flash, make_response
 
+from app.constants import EXPIRE_TIME
 from app.db import get_db
 from app.decorators.login_required import login_required
 from app.utils import make_redirect
@@ -86,7 +86,7 @@ def api_signin():
 
     payload = {
         '_id': str(user['_id']),
-        'exp': datetime.utcnow() + timedelta(hours=3)
+        'exp': datetime.utcnow() + timedelta(hours=EXPIRE_TIME)
     }
 
     token = jwt.encode(payload, os.getenv('SECRET_KEY'), algorithm='HS256')
