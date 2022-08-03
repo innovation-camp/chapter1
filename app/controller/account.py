@@ -1,4 +1,6 @@
 import os
+import re
+
 import jwt
 import hashlib
 from datetime import datetime, timedelta
@@ -50,15 +52,20 @@ def api_signup():
         flash('올바른 이메일 형식이 아닙니다.')
         return render_template('account/signup.html')
 
+    reg = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/'
+    if not re.search(reg, password):
+        flash('비밀번호 형식이 올바르지 않습니다. (영문/숫자포함 8자이상)')
+        return render_template('account/signup.html')
+
+    if password_check != password:
+        flash('비밀번호가 일치하지 않습니다.')
+        return render_template('account/signup.html')
+
     db = get_db()
     user = db.user.find_one({"email": email})
 
     if user:
         flash('중복된 이메일입니다.')
-        return render_template('account/signup.html')
-
-    if password != password_check:
-        flash('비밀번호가 일치하지 않습니다.')
         return render_template('account/signup.html')
 
     hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
