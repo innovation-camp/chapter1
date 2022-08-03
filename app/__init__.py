@@ -27,8 +27,8 @@ def create_app(test_config=None):
         pass
 
     # 이곳에 컨트롤러 모듈관리를 해주세요
-    from .controller import ctr_test
-    app.register_blueprint(ctr_test.bp)
+    from .controller import ctr_test, posts
+    app.register_blueprint(posts.bp)
 
 
     app.debug = True
