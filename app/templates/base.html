@@ -2,13 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name = "Keywords" content = "헌책줄게, 중고책, 웹 포트폴리오, 헌책, 중고나라, 당근마켓, 알라딘">
-    <meta name = "Description" content = "안녕하세요, 중고책 거래 전문 사이트 헌책줄게입니다.">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png">
+    <meta name="Keywords" content="헌책줄게, 중고책, 웹 포트폴리오, 헌책, 중고나라, 당근마켓, 알라딘">
+    <meta name="Description" content="안녕하세요, 중고책 거래 전문 사이트 헌책줄게입니다.">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="shortcut icon" type="image/x-icon"
+          href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png">
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+    <link rel ="stylesheet" href = "{{ url_for('static', filename='signin.css')}}" type="text/css">
+    <link rel ="stylesheet" href = "{{ url_for('static', filename='signup.css')}}" type="text/css">
+
     <title>헌책줄게</title>
 </head>
 <body>
- {% block content %} {% endblock %}
+{% block content %} {% endblock %}
 </body>
 </html>

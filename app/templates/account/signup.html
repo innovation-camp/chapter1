@@ -1,31 +1,38 @@
 {% extends "base.html" %} {% block content %}
-<div>
-<h1>signup</h1>
-    <form action="{{ url_for('account.api_signup') }}" method="post">
-        <div>
-            <label for="usermail">Email</label>
-            <input type="email" name="usermail" required />
+<section>
+    <div class="signin">
+        <div class="signin_box">
+            <div class="image">
+                <img class="fit-picture"
+                     src="/static/open-book%202.png">
+            </div>
+            <div class="input_boxup">
+                <h1 class="signtitle">헌책줄게</h1>
+                <form action="{{ url_for('account.api_signup') }}" method="post">
+                    <div class="labeln">
+                        <label for="usermail"></label>
+                        <input class="input is-rounded is-small btnup" type="email" name="usermail" style="width:300px;" placeholder="이메일을 입력하세요" required/>
+                    </div>
+                    <div class="labeln">
+                        <label for="usernickname"></label>
+                        <input class="input is-rounded is-small btnup" type="text" name="usernickname" style="width:300px;" placeholder="닉네임을 입력하세요" required/>
+                    </div>
+                    <div class="labeln">
+                        <label for="userpw"></label>
+                        <input class="input is-rounded is-small btnup" type="password" name="userpw" style="width:300px;" placeholder="비밀번호를 입력하세요" required/>
+                    </div>
+                    <div class="labeln">
+                        <label for="userpwcheck"></label>
+                        <input class="input is-rounded is-small btnup" type="password" name="userpwcheck" style="width:300px;" placeholder="비밀번호를 재입력하세요" required/>
+                    </div>
+                    <input id="btn" type="submit" class="button is-warning btn" value="완료">
+                    {% with messages = get_flashed_messages() %} {% if messages %}
+                    {{ messages[0] }}
+                    {% endif %}
+                    {% endwith %}
+                </form>
+            </div>
         </div>
-        <div>
-            <label for="usernickname">NickName</label>
-            <input type="text" name="usernickname" required />
-        </div>
-        <div>
-            <label for="userpw">Password</label>
-            <input type="password" name="userpw" required />
-        </div>
-        <div>
-            <label for="userpwcheck">Password check</label>
-            <input type="password" name="userpwcheck" required />
-        </div>
-        <input type="submit" value="완료">
-        {% with messages = get_flashed_messages()  %} {% if messages %}
-            {{ messages[0] }}
-        {% endif %}
-        {% endwith %}
-    </form>
-
-</div>
-
+</section>
 
 {% endblock %}
