@@ -8,6 +8,7 @@ from flask import Blueprint, render_template, request, g, redirect, url_for, fla
 
 from app.db import get_db
 from app.decorators.login_required import login_required
+from app.utils import make_redirect
 
 bp = Blueprint('account', __name__, url_prefix='/account')
 
@@ -63,7 +64,7 @@ def api_signup():
     hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
 
     db.user.insert_one({"email": email, "password": hashed_password, "nickname": nickname})
-    return redirect(url_for('account.signin'))
+    return make_redirect('account.signin')
 
 
 @bp.route('/api/signin', methods=['POST'])
@@ -90,7 +91,7 @@ def api_signin():
 
     token = jwt.encode(payload, os.getenv('SECRET_KEY'), algorithm='HS256')
 
-    response = make_response(redirect(url_for('account.login_success')))
+    response = make_redirect('account.login_success')
     response.set_cookie(key='token', value=token)
     return response
 
