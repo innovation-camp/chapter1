@@ -15,12 +15,6 @@ from app.utils import make_redirect
 bp = Blueprint('account', __name__, url_prefix='/account')
 
 
-@bp.route('/')
-@login_required
-def account_test():
-    return "hi"
-
-
 @bp.route('/login-success')
 @login_required
 def login_success():
