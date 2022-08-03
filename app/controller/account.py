@@ -3,6 +3,7 @@ import jwt
 import hashlib
 from datetime import datetime, timedelta
 
+from bson import ObjectId
 from flask import Blueprint, render_template, request, g, redirect, url_for, flash, make_response
 
 from app.db import get_db
@@ -18,7 +19,7 @@ def account_test():
 
 
 @bp.route('/login-success')
-# @login_required
+@login_required
 def login_success():
     return "로그인 성공~"
 
@@ -84,17 +85,32 @@ def api_signin():
 
     payload = {
         '_id': str(user['_id']),
-        'exp': datetime.utcnow() + timedelta(seconds=5)
+        'exp': datetime.utcnow() + timedelta(hours=3)
     }
 
-    token = jwt.encode(payload, os.getenv('DATABASE'), algorithm='HS256')
+    token = jwt.encode(payload, os.getenv('SECRET_KEY'), algorithm='HS256')
 
-    response = make_response()
+    response = make_response(redirect(url_for('account.login_success')))
     response.set_cookie(key='token', value=token)
-
-    return redirect(url_for('account.login_success'), Response=response)
-
+    return response
 
 
 
+@bp.before_app_request
+def load_logged_in_user():
+    token = request.cookies.get('token')
+
+    try:
+        payload = jwt.decode(token, os.getenv('SECRET_KEY'), algorithms=['HS256'])
+        user_id = payload.get('_id')
+
+        if not user_id:
+            raise Exception('토큰 정보가 잘못되었습니다.')
+
+        db = get_db()
+        g.user = db.user.find_one({'_id': ObjectId(user_id)})
+
+    except:
+        flash("유효하지 않은 토큰입니다.")
+        return redirect(url_for('account.signin'))
 
