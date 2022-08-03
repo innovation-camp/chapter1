@@ -1,6 +1,9 @@
+import os
+import jwt
 import hashlib
+from datetime import datetime, timedelta
 
-from flask import Blueprint, render_template, request, g, redirect, url_for, flash
+from flask import Blueprint, render_template, request, g, redirect, url_for, flash, make_response
 
 from app.db import get_db
 from app.decorators.login_required import login_required
@@ -12,6 +15,12 @@ bp = Blueprint('account', __name__, url_prefix='/account')
 @login_required
 def account_test():
     return "hi"
+
+
+@bp.route('/login-success')
+# @login_required
+def login_success():
+    return "로그인 성공~"
 
 
 @bp.route('/signup')
@@ -56,8 +65,36 @@ def api_signup():
     return redirect(url_for('account.signin'))
 
 
-@bp.route('/api/signin')
+@bp.route('/api/signin', methods=['POST'])
 def api_signin():
+    email = request.form.get('usermail')
+    password = request.form.get('userpw')
+    pw_hash = hashlib.sha256(password.encode('utf-8')).hexdigest()
+
+    db = get_db()
+    user = db.user.find_one({'email': email})
+
+    if not user:
+        flash('존재하지 않는 회원입니다.')
+        return redirect(url_for('account.signin'))
+
+    if user['password'] != pw_hash:
+        flash('비밀번호가 일치하지 않습니다.')
+        return redirect(url_for('account.signin'))
+
+    payload = {
+        '_id': str(user['_id']),
+        'exp': datetime.utcnow() + timedelta(seconds=5)
+    }
+
+    token = jwt.encode(payload, os.getenv('DATABASE'), algorithm='HS256')
+
+    response = make_response()
+    response.set_cookie(key='token', value=token)
+
+    return redirect(url_for('account.login_success'), Response=response)
 
 
-    return render_template('account/signin.html')
+
+
+
