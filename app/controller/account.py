@@ -111,6 +111,5 @@ def load_logged_in_user():
         g.user = db.user.find_one({'_id': ObjectId(user_id)})
 
     except:
-        flash("유효하지 않은 토큰입니다.")
-        return redirect(url_for('account.signin'))
+        print("Error!")
 
