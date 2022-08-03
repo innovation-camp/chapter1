@@ -1,1 +1,31 @@
+{% extends "base.html" %} {% block content %}
+<div>
 <h1>signup</h1>
+    <form action="{{ url_for('account.api_signup') }}" method="post">
+        <div>
+            <label for="usermail">Email</label>
+            <input type="email" name="usermail" required />
+        </div>
+        <div>
+            <label for="usernickname">NickName</label>
+            <input type="text" name="usernickname" required />
+        </div>
+        <div>
+            <label for="userpw">Password</label>
+            <input type="password" name="userpw" required />
+        </div>
+        <div>
+            <label for="userpwcheck">Password check</label>
+            <input type="password" name="userpwcheck" required />
+        </div>
+        <input type="submit" value="완료">
+        {% with messages = get_flashed_messages()  %} {% if messages %}
+            {{ messages[0] }}
+        {% endif %}
+        {% endwith %}
+    </form>
+
+</div>
+
+
+{% endblock %}

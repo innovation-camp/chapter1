@@ -1,1 +1,22 @@
+{% extends "base.html" %} {% block content %}
+<div>
 <h1>signin</h1>
+    <form action="{{ url_for('account.api_signup') }}" method="post">
+        <div>
+            <label for="usermail">Email</label>
+            <input type="email" name="usermail" required />
+        </div>
+        <div>
+            <label for="userpw">Password</label>
+            <input type="password" name="userpw" required />
+        </div>
+        <input type="submit" value="로그인">
+        <form action="/account/signup">
+            <button>회원가입</button>
+        </form>
+    </form>
+
+</div>
+
+
+{% endblock %}
