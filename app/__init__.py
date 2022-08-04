@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, url_for
+from flask import Flask
 from dotenv import load_dotenv
 
 load_dotenv(verbose=True)
@@ -29,6 +29,8 @@ def create_app(test_config=None):
     # 이곳에 컨트롤러 모듈관리를 해주세요
     from .controller import ctr_test
     app.register_blueprint(ctr_test.bp)
+    from .controller import ctr_home
+    app.register_blueprint(ctr_home.bp)
 
 
     app.debug = True
