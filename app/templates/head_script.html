@@ -10,7 +10,8 @@
         let location = $('#location').val()
         let genre = $('#genre').val()
         let contact = $('#contact').val()
-        let is_selling = $('#isselling').val()
+        let is_selling = $('#is_selling').val()
+
         $.ajax({
             type: "POST",
             url: '/post',
@@ -27,7 +28,7 @@
             },
             success: function (response) {
                 alert(response["msg"])
-                window.location.replace('/post/index') //href가 아닌 replace는 뒤로가기 안됨, 이전 데이터를 저장하는 형태가 아님 
+                window.location.replace('/list') //href가 아닌 replace는 뒤로가기 안됨, 이전 데이터를 저장하는 형태가 아님 
             }
         });
     }
@@ -85,7 +86,7 @@
                 },
                 success: function (response) {
                     alert(response["msg"])
-                    window.location.replace('/post/index') //index 페이지로 이동해야 함
+                    window.location.replace('/list') //index 페이지로 이동해야 함
                 }
             });
         } else {

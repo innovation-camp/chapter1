@@ -10,6 +10,7 @@
 <body>
     {% include 'navbar.html' %}
 
+ {% block content %}
     <div class="posting">
         {% include '/components/list_btn.html' %}
         {% include '/components/post_name.html' %}
@@ -19,7 +20,7 @@
                     <label class="input-group-text" for="is_selling">구 분</label>
                 </div>
                 <div class="flex-item">
-                    <select class="form-select" id="isselling">
+                    <select class="form-select" id="is_selling">
                         <option value="1">팝니다</option>
                         <option value="0">삽니다</option>
                     </select>
@@ -116,5 +117,6 @@
                 <button onclick="create_board()" type="button" class="btn btn-dark post-btn" id="btn-save">등록</button>
             </div>
     </div>
+{% endblock %}
 </body>
 </html>

@@ -10,6 +10,7 @@
 <body>
     {% include 'navbar.html' %}
 
+{% block content %}
     <div class="posting">
         {% include '/components/list_btn.html' %}
 
@@ -28,7 +29,7 @@
             </div>
             <div class="flex-item">
                 <label class="form-control" id="isselling">
-                    {% if post['is_selling'] == '1' %}
+                    {% if post['is_selling']==true %}
                         <label>팝니다</label>
                     {% else %}
                         <label>삽니다</label>
@@ -124,5 +125,6 @@
 
 
     </div>
+{% endblock %}
 </body>
 </html>
