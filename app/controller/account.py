@@ -91,7 +91,7 @@ def api_signin():
     return response
 
 
-@bp.route('/api/signout', methods=['POST'])
+@bp.route('/api/signout', methods=['POST', 'GET'])
 def api_signout():
     response = make_redirect('home.main')
     response.set_cookie('token', "")
