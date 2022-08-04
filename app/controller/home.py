@@ -5,12 +5,12 @@ from app.db import get_db
 bp = Blueprint('home', __name__, url_prefix='/')
 
 
-@bp.route('')
+@bp.route('/list')
 def main():
     return render_template('mainpage.html')
 
 
-@bp.route('/welcome')
+@bp.route('/')
 def welcome():
     return render_template('welcome.html')
 
@@ -21,15 +21,13 @@ def get_list():
     global data
     db = get_db()
     request_data = dict(request.json);
-    print(request_data)
-    if request_data.get('category') is not None:
+    if request_data.get('genre') is not None:
         data = list(db.board.find(
-            {"category": request_data.get('category'), "is_selling": request_data.get('is_selling'),
-             }, {"_id": False}))
+            {"genre": request_data.get('genre'), "is_selling": request_data.get('is_selling'),
+             "is_deleted":False}, {"_id": False,"writer":False}).sort("created_at",-1))
     else:
         data = list(db.board.find(
-            {"is_selling": "0",
-             }, {"_id": False}))
-    print(data)
+            {"is_selling": request_data.get('is_selling'),
+             "is_deleted":False}, {"_id": False,"writer":False}).sort("created_at",-1))
     result = jsonify(data)
     return result

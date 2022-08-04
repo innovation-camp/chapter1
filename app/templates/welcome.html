@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name = "Keywords" content = "헌책줄게, 중고책, 웹 포트폴리오, 헌책, 중고나라, 당근마켓, 알라딘">
-    <meta name = "Description" content = "안녕하세요, 중고책 거래 전문 사이트 헌책줄게입니다.">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
-    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='image/logo.icon')}}">
+       {% include 'common/head.html' %}
     <link rel ="stylesheet" href = "{{ url_for('static', filename='css/global.css')}}" type="text/css">
     <link rel ="stylesheet" href = "{{ url_for('static', filename='css/welcome.css')}}" type="text/css">
     <title>헌책줄게-환영합니다!</title>
@@ -14,10 +9,10 @@
 <body>
     <div id="welcome_boarder">
         <h1>
-            <img src = {{ url_for('static', filename='image/logo.gif') }} alt="logo.gif" ></img>
-            <div>헌책줄게</div>
-            <div style="font-weight: normal">헌책줄게 서비스는 어쩌구 저쩌구 서비스입니다.</div>
-            <button>더 알아보기</button>
+            <img src = "{{ url_for('static', filename='image/logo.gif') }}" alt="logo.gif" ></img>
+            <div style="font-weight: bold;font-size:4rem">헌책줄게</div>
+            <div style="font-weight: normal; font-size:14px">헌책줄게 서비스는 중고책 거래 서비스입니다.</div>
+            <button id="to_list" onclick="window.location.href='list'">더 알아보기</button>
         </h1>
     </div>
 </body>
