@@ -17,6 +17,7 @@ content > div {
 }
 
 content #bar {
+    width:87%;
     display: flex;
     justify-content: space-between;
     align-items: center;
