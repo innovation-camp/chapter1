@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% include 'head.html' %}
+    {% include 'common/head.html' %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" type="text/css">
 
@@ -9,7 +9,7 @@
 </head>
 <body>
 {% block content %}
-{% include 'navbar.html' %}
+{% include 'common/navbar.html' %}
 <script type="module">
     import api from "{{ url_for('static', filename='js/api.js') }}";
 
