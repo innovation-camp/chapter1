@@ -37,7 +37,7 @@
                                         <img src = ${data[i].img} alt="이미지 링크 확인"/>
                                         <div role="title">${data[i].title}</div>
                                         <div role="des">${data[i].description}</div>
-                                        <div role="price">${data[i].price ? data[i].price.toLocaleString() : "미정"}</div>
+                                        <div role="price">${data[i].price ? Number(data[i].price).toLocaleString() + "원" : "미정"}</div>
                                     </div>`;
             $(contentBox).append(cardboard);
 
