@@ -32,7 +32,13 @@ def create_app(test_config=None):
     app.register_blueprint(load_logged_in_user.bp)
 
     # 이곳에 컨트롤러 모듈관리를 해주세요
-    from .controller import ctr_test, posts
+    from .controller import test
+    app.register_blueprint(test.bp)
+
+    from .controller import home
+    app.register_blueprint(home.bp)
+
+    from .controller import posts
     app.register_blueprint(posts.bp)
 
     from .controller import account
