@@ -86,7 +86,7 @@ def board_detail(num):
     formated_date = template.render(date=post['created_at'])
 
     if post['is_deleted'] == True:
-        return render_template('error.html')
+        return render_template('error/error.html')
     else:
         return render_template('post/detail.html',
                                post=post, board_id=int(num),
