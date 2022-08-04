@@ -21,6 +21,11 @@ def login_success():
     return "로그인 성공~"
 
 
+@bp.route('/logout-success')
+def logout_success():
+    return "로그아웃 성공~"
+
+
 @bp.route('/signup')
 def signup():
     return render_template('account/signup.html')
@@ -96,6 +101,10 @@ def api_signin():
     response.set_cookie(key='token', value=token)
     return response
 
-
+@bp.route('/api/signout', methods=['POST'])
+def api_signout():
+    response = make_redirect('account.logout_success')
+    response.set_cookie('token', "")
+    return response
 
 
