@@ -18,11 +18,17 @@
         background: #FFD54F;
       }
 
+.sign_title{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 2.5rem;
+}
+
 .signin_box{
 
-    padding:20px;
+    padding:10px;
     width:400px;
-    height:400px;
+    height:420px;
     position:absolute;
     left:50%;
     top:50%;
@@ -50,14 +56,14 @@
     margin-left: 10px;
 }
 .help1{
-
-    padding-top: 10px;
-    padding-bottom:15px ;
+    padding:10px;
+    /*padding-top: 10px;*/
+    /*padding-bottom:15px ;*/
 }
 
-.help2{
-    padding-bottom:20px ;
-}
+/*.help2{*/
+/*    padding-bottom:20px ;*/
+/*}*/
 
 .btne{
     width:300px;
