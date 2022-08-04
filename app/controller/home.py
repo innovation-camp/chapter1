@@ -7,7 +7,7 @@ bp = Blueprint('home', __name__, url_prefix='/')
 
 @bp.route('')
 def main():
-    return render_template('base.html')
+    return render_template('mainpage.html')
 
 
 @bp.route('/welcome')

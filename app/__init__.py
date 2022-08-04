@@ -27,10 +27,10 @@ def create_app(test_config=None):
         pass
 
     # 이곳에 컨트롤러 모듈관리를 해주세요
-    from .controller import ctr_test
-    app.register_blueprint(ctr_test.bp)
-    from .controller import ctr_home
-    app.register_blueprint(ctr_home.bp)
+    from .controller import test
+    app.register_blueprint(test.bp)
+    from .controller import home
+    app.register_blueprint(home.bp)
 
 
     app.debug = True
