@@ -1,0 +1,22 @@
+<nav class="navbar">
+    <div class="navbar_menu">
+        <i class="test"></i>
+        <a class="navbar_logo" href="">헌책줄게</a>
+        <ul class="navbar_select">
+            <li><a href="">판매하기</a></li>
+            <li><a href="">구매하기</a></li>
+        </ul>
+    </div>
+    <!--jinja2 템플릿 이용해서 로그인이 되어있으면 로그아웃 버튼으로 변경, 아니면 로그인 버튼-->
+        {% if g.user %}
+            <form action="{{ url_for('account.api_signout') }}" method="post">
+                <input type="submit" value="로그아웃" class="navbar__item" />
+            </form>
+            {% else %}
+            <ul class="navbar_login">
+                <li><a class="login" href="">로그인</a></li>
+            </ul>
+        {% endif %}
+    </div>
+
+</nav>

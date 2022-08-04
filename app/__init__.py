@@ -2,6 +2,9 @@ import os
 from flask import Flask
 from dotenv import load_dotenv
 
+from app.db import get_db
+from app.middleware.load_logged_in_user import load_logged_in_user
+
 load_dotenv(verbose=True)
 
 
@@ -10,7 +13,6 @@ def create_app(test_config=None):
 
     app.config.from_mapping(
         SECRET_KEY=os.getenv('SECRET_KEY'),
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
 
     if test_config is None:
@@ -26,12 +28,21 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from .middleware import load_logged_in_user
+    app.register_blueprint(load_logged_in_user.bp)
+
     # 이곳에 컨트롤러 모듈관리를 해주세요
     from .controller import test
     app.register_blueprint(test.bp)
+
     from .controller import home
     app.register_blueprint(home.bp)
 
+    from .controller import posts
+    app.register_blueprint(posts.bp)
+
+    from .controller import account
+    app.register_blueprint(account.bp)
 
     app.debug = True
     return app

@@ -9,14 +9,14 @@ bp = Blueprint('test', __name__, url_prefix='/test')
 @bp.route('/')
 def main():
     return '''
-                    <div align="center">
-                        <h1 align="center">Hello, World! 👋</h1>
-                    </div>
-                    '''
+            <div align="center">
+                <h1 align="center">Hello, World! 👋</h1>
+            </div>
+            '''
 
 
 @bp.route('/check_db_connect')
-def TestDBConncect():
+def test_db_connect():
     try:
         db = get_db()
         doc = {
