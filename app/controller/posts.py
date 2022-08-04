@@ -40,25 +40,29 @@ def board_create():
 
     count = list(db.board.find({}, {'_id': False}))
     num = len(count) + 1
-
+    
+    selling = True if is_selling_receive=="1" else False
+        
     doc = {
         'num': num,
         'title': title_receive,
         'img': img_receive,
         'description': description_receive,
-        'is_selling': is_selling_receive,
+        'is_selling': selling,
         'condition': condition_receive,
         'price': price_receive,
         'location': location_receive,
         'genre': genre_receive,
         'contact': contact_receive,
-        'is_soldout': 0,
+        'is_soldout': False,
         'is_deleted': False,
         'writer': g.user,
         'created_at': datetime.datetime.now(),
         'updated_at': datetime.datetime.now()
     }
     db.board.insert_one(doc)
+    print("is_selling 값 알려죠", doc)
+
     return jsonify({'msg': '글이 성공적으로 작성되었습니다!'})
 
 
@@ -82,7 +86,7 @@ def board_detail(num):
     formated_date = template.render(date=post['created_at'])
 
     if post['is_deleted'] == True:
-        return render_template('error.html')
+        return render_template('error/error.html')
     else:
         return render_template('post/detail.html',
                                post=post, board_id=int(num),
@@ -120,15 +124,17 @@ def board_update(num):
     contact_receive = request.form['contact_give']
     updated_at = datetime.datetime.now()
 
+    selling = True if is_selling_receive=="1" else False
+
     db.board.update_one({'num': int(num)}, {'$set': {'title': title_receive,
                                                      'description': description_receive,
-                                                     'is_selling': is_selling_receive,
+                                                     'is_selling': selling,
                                                      'condition': condition_receive,
                                                      'price': price_receive,
                                                      'location': location_receive,
                                                      'genre': genre_receive,
                                                      'contact': contact_receive,
-                                                     'is_soldout': 0,
+                                                     'is_soldout': False,
                                                      'updated_at': updated_at}})
     return jsonify({'msg': '수정 완료!'})
 

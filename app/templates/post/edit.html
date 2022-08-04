@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% include 'head.html' %}
-    {% include 'head_script.html' %}
+    {% include 'common/head.html' %}
+    {% include 'components/head_script.html' %}
 
     <title>수정페이지</title>    
     
 </head>
 <body>
-    {% include 'navbar.html' %}
+    {% include 'common/navbar.html' %}
 
-
+{% block content %}
     <div class="posting">
         {% include '/components/list_btn.html' %}
 
@@ -27,13 +27,8 @@
             </div>
             <div class="flex-item">
                 <select class="form-select" id="is_selling">
-                    {% if post['is_selling']=='1' %}
-                        <option value="1">팝니다</option>
-                        <option value="0">삽니다</option>
-                    {% else %}
-                        <option value="1">팝니다</option>
-                        <option value="0" selected>삽니다</option>
-                    {% endif %}
+                    <option value="1" {% if post['is_selling']==true %}selected{% endif %}>팝니다</option>
+                    <option value="0" {% if post['is_selling']==false %}selected{% endif %}>삽니다</option>
                 </select>
             </div>
         </div>
@@ -91,19 +86,11 @@
             </div>
             <div class="flex-item">
                 <select class="form-select" id="condition">
-                    {% if post['condition'] == '1' %}
-                    <option value="1">아주좋음</option>
-                    <option value="2">좋음</option>
-                    <option value="3">보통</option>
-                    <option value="4">낡음</option>
-                    <option value="5">아주낡음</option>
-                    {% else %}
-                    <option value="1">아주좋음</option>
-                    <option value="2">좋음</option>
-                    <option value="3">보통</option>
-                    <option value="4">낡음</option>
-                    <option value="5" selected>아주낡음</option>
-                    {% endif %}
+                    <option value="1" {% if post['condition'] == '1' %}selected{% endif %}>아주좋음</option>
+                    <option value="2" {% if post['condition'] == '2' %}selected{% endif %}>좋음</option>
+                    <option value="3" {% if post['condition'] == '3' %}selected{% endif %}>보통</option>
+                    <option value="4" {% if post['condition'] == '4' %}selected{% endif %}>낡음</option>
+                    <option value="5" {% if post['condition'] == '5' %}selected{% endif %}>아주낡음</option>
                 </select>
             </div>
         </div>
@@ -148,5 +135,6 @@
             <button onclick="update_board()" type="button" class="btn btn-dark post-btn" id="btn-save">수정하기</button>
         </div>
     </div>
+{% endblock %}
 </body>
 </html>
