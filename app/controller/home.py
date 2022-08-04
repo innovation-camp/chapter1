@@ -20,9 +20,7 @@ def welcome():
 def get_list():
     global data
     db = get_db()
-    print(f'>>>>>>>>>{request.json}')
     request_data = dict(request.json);
-    print(f'>>>>>>>>>{request_data}')
     if request_data.get('genre') is not None:
         data = list(db.board.find(
             {"genre": request_data.get('genre'), "is_selling": request_data.get('is_selling'),
