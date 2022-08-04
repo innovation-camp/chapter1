@@ -2,7 +2,7 @@ import datetime
 from xmlrpc.client import boolean
 from app.db import get_db
 from jinja2 import Template
-from flask import Blueprint, render_template, jsonify, request, redirect, url_for
+from flask import Blueprint, render_template, jsonify, request
 
 # parameter (블루프린터 별칭, 모듈명, axis url)
 from app.decorators.login_required import login_required
@@ -54,7 +54,7 @@ def board_create():
         'contact': contact_receive,
         'is_soldout': 0,
         'is_deleted': False,
-        'writer': "",
+        'writer': g.user,
         'created_at': datetime.datetime.now(),
         'updated_at': datetime.datetime.now()
     }
@@ -70,6 +70,14 @@ def board_detail(num):
     post = db.board.find_one({'num': num}, {'_id': False})
     print(post)
 
+    post = db.board.find_one({'num': num}, {'_id': False})
+    writer = post.get('writer')
+
+    is_owner = False
+
+    if writer.get('_id') == g.user.get('_id'):
+        is_owner = True
+
     template = Template("{{ date.strftime('%Y-%m-%d %H:%M:%S') }}")
     formated_date = template.render(date=post['created_at'])
 
@@ -78,7 +86,7 @@ def board_detail(num):
     else:
         return render_template('post/detail.html',
                                post=post, board_id=int(num),
-                               formated_date=formated_date)
+                               formated_date=formated_date, is_owner=is_owner)
 
 
 # 글 수정하는 폼으로 이동

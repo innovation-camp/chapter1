@@ -112,10 +112,17 @@
             </div>
         </div>
 
-        <div class="board-btn">
-            <button onclick="location.href='/post/{{ board_id }}/edit'" type="button" class="btn btn-dark mybtn">수정</button>
-            <button onclick="delete_board()" type="button" class="btn btn-danger mybtn">삭제</button>
-        </div>
+
+        {% if is_owner %}
+            <div class="board-btn">
+                <button onclick="location.href='/post/{{ board_id }}/edit'" type="button" class="btn btn-dark mybtn">수정</button>
+                <button onclick="delete_board()" type="button" class="btn btn-danger mybtn">삭제</button>
+            </div>
+        {% else %}
+
+        {% endif %}
+
+
     </div>
 </body>
 </html>
