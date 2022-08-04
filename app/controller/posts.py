@@ -2,7 +2,7 @@ import datetime
 from xmlrpc.client import boolean
 from app.db import get_db
 from jinja2 import Template
-from flask import Blueprint, render_template, jsonify, request
+from flask import Blueprint, render_template, jsonify, request, g
 
 # parameter (블루프린터 별칭, 모듈명, axis url)
 from app.decorators.login_required import login_required
