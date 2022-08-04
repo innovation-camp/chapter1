@@ -1,76 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="Keywords" content="헌책줄게, 중고책, 웹 포트폴리오, 헌책, 중고나라, 당근마켓, 알라딘">
-    <meta name="Description" content="안녕하세요, 중고책 거래 전문 사이트 헌책줄게입니다.">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="shortcut icon" type="image/x-icon"
-          href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/800px-Apple_logo_black.svg.png">
+    {% include 'head.html' %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" type="text/css">
 
     <title>헌책줄게</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 {% block content %}
-    <script type="module">
-        import api from "{{ url_for('static', filename='js/api.js') }}";
+{% include 'navbar.html' %}
+<script type="module">
+    import api from "{{ url_for('static', filename='js/api.js') }}";
 
-        async function getList(category = null, is_selling = false) {
-            const data = await api('/api/getList', 'POST', {category: category, is_selling: is_selling});
-            const contentBox = document.getElementById('content-box')
-            while (contentBox.hasChildNodes()) {
-                contentBox.removeChild(contentBox.firstChild)
+    function getUrlParams() {
+        var params = {};
+
+        window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+            function (str, key, value) {
+                params[key] = value;
             }
-            let cardboard = ''
-            for (let i = 0; i < data.length; i++) {
-                cardboard = `<div class="card" num=${data[i].num}>
-                                        <img src = ${data[i].src}/>
+        );
+
+        return params;
+    }
+
+    async function getList(genre = null, is_selling = true) {
+        const data = await api('/api/getList', 'POST', {genre: genre, is_selling: is_selling});
+        const contentBox = document.getElementById('content-box')
+        while (contentBox.hasChildNodes()) {
+            contentBox.removeChild(contentBox.firstChild)
+        }
+        let cardboard = '';
+        for (let i = 0; i < data.length; i++) {
+            cardboard = `<div class="card" num=${data[i].num} onclick="window.location.href='post/${data[i].num}'">
+                                        <img src = ${data[i].img} alt="이미지 링크 확인"/>
                                         <div role="title">${data[i].title}</div>
                                         <div role="des">${data[i].description}</div>
                                         <div role="price">${data[i].price ? data[i].price.toLocaleString() : "미정"}</div>
                                     </div>`;
-                $(contentBox).append(cardboard);
+            $(contentBox).append(cardboard);
 
-            }
-            $('#bar').children("span").text(`총 ${data.length}개`)
         }
+        $('#bar').children("span").text(`총 ${data.length}개`);
+    }
 
-        function change_category() {
-            $("#genre").children("button").on("click", (e) => {
-                getList($(e.target).val() == "null"? null : $(e.target).val(), "0")
-                $("#genre").children("button").attr("select", "false");
-                $(e.target).attr("select", "true");
-            })
-        }
-
-
-        window.addEventListener('load', () => {
-            getList();
-            change_category();
+    function change_category() {
+        $("#genre").children("button").on("click", (e) => {
+            let params = getUrlParams();
+            params = (params.selling == undefined) ? true : params.selling;
+            params = (params == 'true' || params == true) ? true : false;
+            getList($(e.target).val() == "null" ? null : $(e.target).val(), params)
+            $("#genre").children("button").attr("select", "false");
+            $(e.target).attr("select", "true");
         })
-    </script>
-    <content>
-        <nav id="genre">
-            <button value=null select=true>전체보기</button>
-            <button value="장르1">장르1</button>
-            <button value="장르2">장르2</button>
-            <button value="장르3">장르3</button>
-        </nav>
-        <div>
-            <div id="bar">
-                <span></span>
-                <button id="to_write">
-                    글쓰기
-                </button>
-            </div>
-            <div id="content-box">
+    }
 
-            </div>
+
+    window.addEventListener('load', () => {
+        let params = getUrlParams();
+        params = (params.selling == undefined) ? true : params.selling;
+        params = (params == 'true' || params == true) ? true : false;
+
+        getList(null, params);
+        change_category();
+    })
+</script>
+<content>
+    <nav id="genre">
+        <button value=null select=true>전체보기</button>
+        <button value="소설">소설</button>
+        <button value="자기계발">자기계발</button>
+        <button value="외국어">외국어</button>
+        <button value="수험서">수험서</button>
+        <button value="취미">취미</button>
+        <button value="기타">기타</button>
+
+    </nav>
+    <div>
+        <div id="bar">
+            <span style="font-weight: bold"></span>
+            <button id="to_write" onclick="window.location.href='post'">
+                글쓰기
+            </button>
         </div>
-    </content>
+        <div id="content-box">
+
+        </div>
+    </div>
+</content>
 {% endblock %}
 </body>
 </html>
