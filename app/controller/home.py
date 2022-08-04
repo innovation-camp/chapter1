@@ -15,7 +15,6 @@ def welcome():
     return render_template('welcome.html')
 
 
-# todo : is_delete 적용, is_selling 정상값으로 변경
 @bp.route('/api/getList', methods=['POST'])
 def get_list():
     global data

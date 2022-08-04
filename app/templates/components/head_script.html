@@ -36,6 +36,7 @@
     // 중고책 글 수정 
     function update_board() {
         let num = $('#num').val()
+        let img = $('#img').val()
         let title = $('#title').val()
         let description = $('#description').val()
         let condition = $('#condition').val()
@@ -44,9 +45,9 @@
         let genre = $('#genre').val()
         let contact = $('#contact').val()
         let is_selling = $('#is_selling').val()
-        console.log('number확인',num)
+        console.log('number확인', num)
         id = Number(num)
-        let url = '/post/'+id
+        let url = '/post/' + id
 
         $.ajax({
             type: "PATCH",
@@ -54,6 +55,7 @@
             data: {
                 num_give: num,
                 title_give: title,
+                img_give: img,
                 description_give: description,
                 condition_give: condition,
                 price_give: price,
@@ -64,7 +66,7 @@
             },
             success: function (response) {
                 alert(response["msg"])
-                window.location.replace('/post/'+id)
+                window.location.replace('/post/' + id)
             }
         });
 
@@ -72,16 +74,16 @@
 
     // 중고책 게시글 삭제 
     function delete_board() {
-        if(confirm("정말 삭제하시겠습니까?")==true){
-            
+        if (confirm("정말 삭제하시겠습니까?") == true) {
+
             let num = $('#num').val()
             id = Number(num)
 
             $.ajax({
                 type: "PATCH",
-                url: '/post/'+id+`/delete`,
+                url: '/post/' + id + `/delete`,
                 data: {
-                    num_give : id, //`${id}`
+                    num_give: id, //`${id}`
                     is_delete_give: true,
                 },
                 success: function (response) {
