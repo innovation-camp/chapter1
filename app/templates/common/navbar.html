@@ -9,9 +9,9 @@
     </div>
     <!--jinja2 템플릿 이용해서 로그인이 되어있으면 로그아웃 버튼으로 변경, 아니면 로그인 버튼-->
         {% if g.user %}
-            <form action="{{ url_for('account.api_signout') }}" method="post">
-                <input type="submit" value="로그아웃" class="navbar__item" />
-            </form>
+            <ul class="navbar_login">
+                <li><a class="login" href="/account/api/signout">로그아웃</a></li>
+            </ul>
             {% else %}
             <ul class="navbar_login">
                 <li><a class="login" href="/account/signin">로그인</a></li>

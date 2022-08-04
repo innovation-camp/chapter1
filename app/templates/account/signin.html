@@ -20,26 +20,15 @@
                         <label for="userpw"></label>
                         <input class="input is-rounded is-small btne" type="password" name="userpw" placeholder="비밀번호를 입력하세요" required/>
                     </div>
+                    <div style="display:flex; justify-content: center">
+                        <input id="btn1" type="submit" class="button is-warning btn" value="로그인">
+                        {% with messages = get_flashed_messages() %} {% if messages %}
+                        {{ messages[0] }}
+                        {% endif %}
+                        {% endwith %}
+                         <button id="btn2" class="button is-warning" onclick="window.location.href='/account/signup' ">회원가입</button>
+                    </div>
                 </form>
-                <div class="signin_log">
-                    <div class="sign_in_btn">
-                        <form action="{{ url_for('account.api_signin') }}" method="post">
-
-                            <input id="btn1" type="submit" class="button is-warning " value="로그인">
-                            {% with messages = get_flashed_messages() %} {% if messages %}
-                            {{ messages[0] }}
-                            {% endif %}
-                            {% endwith %}
-                        </form>
-                    </div>
-                    <div class="sign_in_btn">
-                        <form action="/account/signup">
-                            <button id="btn2" class="button is-warning ">회원가입</button>
-                        </form>
-                    </div>
-                </div>
-                </div>
-            </form>
         </div>
     </div>
 
