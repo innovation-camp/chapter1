@@ -94,7 +94,13 @@ def board_detail(num):
 @login_required
 def board_edit(num):
     db = get_db()
+
     post = db.board.find_one({'num': num}, {'_id': False})
+    writer = post.get('writer')
+
+    # 본인 게시물이 아닌 경우 detail page로 redirect 하여 접근 제어
+    if writer.get('_id') != g.user.get('_id'):
+        return render_template('post/detail.html', post=post)
     return render_template('post/edit.html', post=post)
 
 
@@ -128,10 +134,18 @@ def board_update(num):
 
 
 # 글 삭제하기
-@bp.route("/<int:num>/delete", methods=['PATCH'])
+@bp.route("/<int:num>/delete", methods=['PATCH', 'GET'])
 @login_required
 def board_delete(num):
     db = get_db()
+
+    post = db.board.find_one({'num': num}, {'_id': False})
+    writer = post.get('writer')
+
+    # 본인 게시물이 아닌 경우 detail page로 redirect 하여 접근 제어
+    if writer.get('_id') != g.user.get('_id'):
+        return render_template('post/detail.html', post=post)
+
     num_receive = request.form['num_give']
     is_delete = request.form['is_delete_give']
     db.board.update_one({'num': int(num_receive)}, {'$set': {'is_deleted': boolean(is_delete)}})
