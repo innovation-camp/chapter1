@@ -11,21 +11,16 @@
     {% include 'navbar.html' %}
     
     <div class="posting">
-        <div class="list-btn">
-            <button type="button" class="btn btn-warning list-btn-detail"
-            onclick="location.href='/post/index'">목록</button>
-        </div>
+        {% include '/components/list_btn.html' %}
+
 
         <div class="top-container"> 
             <p class="num-container" >글번호:</p>
             <input id="num" class="num-container" value="{{ post['num'] }}" readonly="readonly">
             <label id="date" class="date-container">작성일자: {{ formated_date }}</label>
         </div>
-        
-        <div class="form-title">
-            <h2> {{ post['title'] }}</h2>
-            <img class="book-img" src="{{ post['img']}}">
-        </div>
+
+        {% include '/components/book_name.html' %}
         
         <div class="flex-container">
             <div class="flex-item">
@@ -117,8 +112,10 @@
             </div>
         </div>
 
-        <button onclick="location.href='/post/{{ board_id }}/edit'" type="button" class="btn btn-secondary mybtn">수정</button>
-        <button onclick="delete_board()" type="button" class="btn btn-secondary mybtn">삭제</button>    
+        <div class="board-btn">
+            <button onclick="location.href='/post/{{ board_id }}/edit'" type="button" class="btn btn-dark mybtn">수정</button>
+            <button onclick="delete_board()" type="button" class="btn btn-danger mybtn">삭제</button>
+        </div>
     </div>
 </body>
 </html>

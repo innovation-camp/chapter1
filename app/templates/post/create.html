@@ -9,17 +9,11 @@
 </head>
 <body>
     {% include 'navbar.html' %}
-    
-    <div class="posting">
-        <div class="list-btn">
-            <button type="button" class="btn btn-secondary list-btn-detail"
-            onclick="location.href='/post/index'">목록</button>
-        </div>
 
-        <div class="form-title">
-            <img class="logo-img" src="/static/img/book.png">
-            <h3> 헌책 등록하기 </h3>
-        </div>
+    <div class="posting">
+        {% include '/components/list_btn.html' %}
+        {% include '/components/post_name.html' %}
+
             <div class="flex-container">
                 <div class="flex-item">
                     <label class="input-group-text" for="is_selling">구 분</label>
@@ -118,8 +112,9 @@
                     <input id="contact" type="text" class="form-control" placeholder="010-0000-0000">
                 </div>
             </div>
-
-        <button onclick="create_board()" type="button" class="btn btn-warning mybtn" id="btn-save">등록하기</button>
+            <div class="board-btn">
+                <button onclick="create_board()" type="button" class="btn btn-dark post-btn" id="btn-save">등록</button>
+            </div>
     </div>
 </body>
 </html>

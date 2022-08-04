@@ -5,7 +5,7 @@ from jinja2 import Template
 from flask import Blueprint, render_template, jsonify, request, redirect, url_for
 
 # parameter (블루프린터 별칭, 모듈명, axis url)
-bp = Blueprint('test', __name__, url_prefix='/post')
+bp = Blueprint('post', __name__, url_prefix='/post')
 
 
 # 글 작성 페이지

@@ -12,21 +12,15 @@
 
 
     <div class="posting">
-        <div class="list-btn">
-            <button type="button" class="btn btn-warning list-btn-detail"
-            onclick="location.href='/post/index'">목록</button>
-        </div>
+        {% include '/components/list_btn.html' %}
 
         <div class="top-container">
             <p class="num-container" >글번호:</p>
             <input id="num" class="num-container" value="{{ post['num'] }}" readonly="readonly">
-            <!-- <label id="num" class="num-container" value="{{ post['num'] }}">글번호: {{ post['num'] }}</label> -->
         </div>
 
-        <div class="form-title">
-            <h2> 글 수정하기 </h2>
-        </div>
-            
+        {% include '/components/update_name.html' %}
+
         <div class="flex-container">
             <div class="flex-item">
                 <label class="input-group-text" for="is_selling">구 분</label>
@@ -150,7 +144,9 @@
             </div>
         </div>
 
-        <button onclick="update_board()" type="button" class="btn btn-warning mybtn" id="btn-save">수정하기</button>
+        <div class="board-btn">
+            <button onclick="update_board()" type="button" class="btn btn-dark post-btn" id="btn-save">수정하기</button>
+        </div>
     </div>
 </body>
 </html>
