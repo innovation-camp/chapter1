@@ -1,13 +1,13 @@
 {% extends "base.html" %} {% block content %}
 <section>
     <div class="signin">
-        <div class="signin_box">
+        <div class="signup_box">
             <div class="image">
                 <img class="fit-picture"
                      src="/static/open-book%202.png">
             </div>
             <div class="input_boxup">
-                <h1 class="signtitle">헌책줄게</h1>
+                <h1 class="signup_title">헌책줄게</h1>
                 <form action="{{ url_for('account.api_signup') }}" method="post">
                     <div class="labeln">
                         <label for="usermail"></label>
@@ -25,11 +25,16 @@
                         <label for="userpwcheck"></label>
                         <input class="input is-rounded is-small btnup" type="password" name="userpwcheck" style="width:300px;" placeholder="비밀번호를 재입력하세요" required/>
                     </div>
-                    <input id="btn" type="submit" class="button is-warning btn" value="완료">
+
+                     <div class="pw_error_msg">
                     {% with messages = get_flashed_messages() %} {% if messages %}
                     {{ messages[0] }}
                     {% endif %}
                     {% endwith %}
+                    </div>
+
+                    <input id="btn" type="submit" class="button is-warning btn" value="완료">
+
                 </form>
             </div>
         </div>
