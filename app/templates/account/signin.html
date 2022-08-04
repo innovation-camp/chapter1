@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block content %}
+
+<section>
+    <div class="signin">
+        <div class="signin_box">
+            <div class="image">
+                    <img class="fit-picture"
+                         src="/static/open-book%202.png">
+                </div>
+            <div class="input_box">
+
+                <h1 class="signtitle">헌책줄게</h1>
+                <form action="{{ url_for('account.api_signin') }}" method="post">
+
+                    <div class="help1">
+                        <label for="usermail"></label>
+                        <input class="input is-rounded is-small btne" type="email" name="usermail" placeholder="이메일을 입력하세요" required/>
+                    </div>
+                    <div class="help2">
+                        <label for="userpw"></label>
+                        <input class="input is-rounded is-small btne" type="password" name="userpw" placeholder="비밀번호를 입력하세요" required/>
+                    </div>
+                    <div>
+                        <input id="btn1"type="submit" class="button is-warning btn" value="로그인">
+                            {% with messages = get_flashed_messages()  %} {% if messages %}
+                            {{ messages[0] }}
+                            {% endif %}
+                            {% endwith %}
+                    </div>
+                </form>
+                    <form action="/account/signup">
+                        <button id="btn2" class="button is-warning">회원가입</button>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+
+.signtitle{
+    padding-bottom: 11px;
+    font-size: 2rem;
+}
+
+.input_boxup{
+
+    padding-top: 40px;
+}
+
+#btn:hover {
+    border: 2px solid wheat;
+}
+
+.labeln{
+    margin-bottom:10px ;
+}
+
+.btnup{
+    width:300px;
+    height: 30px;
+}

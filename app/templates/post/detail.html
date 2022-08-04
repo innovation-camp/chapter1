@@ -9,19 +9,19 @@
 </head>
 <body>
     {% include 'navbar.html' %}
-    
+
     <div class="posting">
         {% include '/components/list_btn.html' %}
 
 
-        <div class="top-container"> 
+        <div class="top-container">
             <p class="num-container" >글번호:</p>
             <input id="num" class="num-container" value="{{ post['num'] }}" readonly="readonly">
             <label id="date" class="date-container">작성일자: {{ formated_date }}</label>
         </div>
 
         {% include '/components/book_name.html' %}
-        
+
         <div class="flex-container">
             <div class="flex-item">
                 <label class="input-group-text" for="is_selling">구 분</label>

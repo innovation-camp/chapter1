@@ -59,6 +59,7 @@ a {
     display: flex;
     list-style: none;
     
+    margin-top: 10px;
     padding-left: 0;
 }
  .navbar_login li {
