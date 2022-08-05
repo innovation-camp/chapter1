@@ -31,7 +31,6 @@ def create_app(test_config=None):
     from .middleware import load_logged_in_user
     app.register_blueprint(load_logged_in_user.bp)
 
-    # 이곳에 컨트롤러 모듈관리를 해주세요
     from .controller import test
     app.register_blueprint(test.bp)
 
