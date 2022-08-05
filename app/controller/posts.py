@@ -116,6 +116,7 @@ def board_update(num):
 
     title_receive = request.form['title_give']
     description_receive = request.form['description_give']
+    img_receive = request.form['img_give']
     is_selling_receive = request.form['is_selling_give']
     condition_receive = request.form['condition_give']
     price_receive = request.form['price_give']
@@ -128,6 +129,7 @@ def board_update(num):
 
     db.board.update_one({'num': int(num)}, {'$set': {'title': title_receive,
                                                      'description': description_receive,
+                                                     'img':img_receive,
                                                      'is_selling': selling,
                                                      'condition': condition_receive,
                                                      'price': price_receive,
